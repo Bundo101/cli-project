@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "cli/project/version"
+require "cli_project/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "cli-project"
-  spec.version       = Cli::Project::VERSION
+  spec.name          = "cli_project"
+  spec.version       = CliProject::VERSION
   spec.authors       = ["'James Britton'"]
   spec.email         = ["'brittonjp@gmail.com'"]
 
   spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
   spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/Bundo101/cli_project"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
