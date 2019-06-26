@@ -1,3 +1,5 @@
+require_relative './movie.rb'
+
 class Movie
   
   attr_accessor :title, :year, :rank

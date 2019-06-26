@@ -1,3 +1,7 @@
+require 'nokogiri'
+require 'open-uri'
+require 'pry'
+
 require_relative './movie.rb'
 
 class Scraper
@@ -21,6 +25,14 @@ class Scraper
     end
   end
   
+  def print_movies
+    self.make_movies
+    Movie.all.each do |movie|
+      if movie.title
+        puts "#{movie.rank} #{movie.title} #{movie.year}"
+      end
+    end
+  end
   
 end
 
