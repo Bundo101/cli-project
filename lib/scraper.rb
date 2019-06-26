@@ -11,13 +11,17 @@ class Scraper
   end
   
   def make_movies
-    self.get_movies
+    self.get_movies.each do |movie|
+      new_movie = Movie.new
+      basic_movie_data = movie.css("h2.slide-title-text").text
+      rank, title, year = str.split(" ")
+      new_movie.rank = rank
+      new_movie.title = title
+      new_movie.year = year
+    end
   end
   
   
 end
 
-
-
-
-#position_title_releaseyear = page.css("div.slide").first.css("h2.slide-title-text").text
+#rank_title_year = page.css("div.slide").first.css("h2.slide-title-text").text

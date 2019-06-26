@@ -1,13 +1,10 @@
 class Movie
   
-  attr_accessor :title, :release_year, :list_position
+  attr_accessor :title, :year, :rank
   
   @@all = []
   
-  def initialize(title, year, postion)
-    @title = title
-    @year = year
-    @position = position
+  def initialize
     @@all << self
   end
   
