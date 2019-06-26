@@ -16,4 +16,5 @@
             
             Ask user if they want full breakdown on movie scores from Metacritic => prompt for input
               if no => return to main list
-              if yes => 
+              if yes => print new data for user: critic score + number positive, mixed & negative reviews; user score + number positive, mixed & negative reviews
+                return to main list
