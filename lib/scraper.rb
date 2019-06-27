@@ -20,7 +20,7 @@ class Scraper
     self.get_movies.each do |movie|
       new_movie = Movie.new
       basic_movie_data = movie.css("h2.slide-title-text").text
-      rank, title, year = basic_movie_data.split(" ")
+      rank, title, year = basic_movie_data.split("\"").map(&:strip)
       #binding.pry
       new_movie.rank = rank
       new_movie.title = title
