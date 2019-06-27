@@ -3,4 +3,4 @@
 require_relative '../config/environment'
 
 #CLI.new
-Scraper.new.make_movies
+Scraper.new.print_movies
