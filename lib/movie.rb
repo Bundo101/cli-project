@@ -1,4 +1,4 @@
-require_relative './movie.rb'
+#require_relative './scraper.rb'
 
 class Movie
   

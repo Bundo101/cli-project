@@ -2,3 +2,7 @@ source "https://rubygems.org"
 
 # Specify your gem's dependencies in cli-project.gemspec
 gemspec
+
+require 'open-uri'
+require 'nokogiri'
+require 'pry'
