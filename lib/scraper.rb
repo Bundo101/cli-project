@@ -13,11 +13,13 @@ class Scraper
   def make_movies
     self.get_movies.each do |movie|
       new_movie = Movie.new
+      
       basic_movie_data = movie.css("h2.slide-title-text").text
       rank, title, year = basic_movie_data.split("\"").map(&:strip)
-      new_movie.rank = rank
-      new_movie.title = title
-      new_movie.year = year
+      new_movie.rank, new_movie.title, new_movie.year = rank, title, year
+      
+      url = movie.css("div p a").attribute("href").value
+      new_movie.url = url
     end
   end
   
@@ -25,10 +27,13 @@ class Scraper
     self.make_movies
     Movie.all.each do |movie|
       if movie.title
-        puts "#{movie.rank} #{movie.title} #{movie.year}"
+        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url}"
       end
+       #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
+        
     end
   end
   
 end
 
+#url = page.css("div.slide").css("div p a").attribute("href").value
