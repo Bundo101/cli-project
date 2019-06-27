@@ -21,12 +21,15 @@ class Scraper
       new_movie = Movie.new
       basic_movie_data = movie.css("h2.slide-title-text").text
       rank, title, year = basic_movie_data.split(" ")
-      binding.pry
+      #binding.pry
       new_movie.rank = rank
       new_movie.title = title
       new_movie.year = year
-      puts new_movie
+      #puts new_movie
     end
+    # Movie.all.each do |movie|
+    #   puts movie.year
+    # end
   end
   
   # def print_movies
