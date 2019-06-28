@@ -1,3 +1,6 @@
+require_relative './scraper.rb'
+
+
 class CLI
   
   def welcome
@@ -7,6 +10,7 @@ class CLI
   
   def initialize
     self.welcome
+    
   end
   
 end

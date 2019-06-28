@@ -6,44 +6,53 @@ class Scraper
     doc = Nokogiri::HTML(open("https://www.businessinsider.com/worst-movies-all-time-according-to-critics-2017-8?r=US&IR=T"))
   end
   
-  def get_movies
-    example = self.scrape_list_page.css("div.slide")
-  end
-  
-  def make_movies
-    self.get_movies.each do |movie|
-      new_movie = Movie.new
-      
-      basic_movie_data = movie.css("h2.slide-title-text").text
-      rank, title, year = basic_movie_data.split("\"").map(&:strip)
-      new_movie.rank, new_movie.title, new_movie.year = rank, title, year
-      
-      url = movie.css("div p a").attribute("href").value
-      new_movie.url = url
-      
-      critic_score_array = movie.css("div p").text.split(" ")
-      critic_score = critic_score_array.find { |element| element.include?("/") }.split("score:").last
-      new_movie.critic_score = critic_score
-      
-      user_score_array = movie.css("div p").text.split(" ")
-      user_score = user_score_array.detect { |element| element.end_with?("/10") } 
-      new_movie.user_score = user_score
-      
-      sample_review = movie.css("div p").text.split("said:")[1].split("—")[0]
-      new_movie.sample_review = sample_review
+  def scrape_movie_details                            
+    movie_details = self.scrape_list_page.css("div.slide")
+    arr = movie_details.map do |movie|
+      movie_hash = {}
+      basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)
+      movie_hash[:rank] = basic_movie_data[0]
+      movie_hash[:title] = basic_movie_data[1]
+      movie_hash[:year] = basic_movie_data[2].delete("()")
+      movie_hash
     end
+    puts arr
   end
   
-  def print_movies
-    self.make_movies
-    Movie.all.each do |movie|
-      if movie.title
-        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score} #{movie.user_score} #{movie.sample_review}"
-      end
-      #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
+  # def make_movies
+  #   self.get_movies.each do |movie|
+  #     new_movie = Movie.new
+      
+  #     basic_movie_data = movie.css("h2.slide-title-text").text
+  #     rank, title, year = basic_movie_data.split("\"").map(&:strip)
+  #     new_movie.rank, new_movie.title, new_movie.year = rank, title, year
+      
+  #     url = movie.css("div p a").attribute("href").value
+  #     new_movie.url = url
+      
+  #     critic_score_array = movie.css("div p").text.split(" ")
+  #     critic_score = critic_score_array.find { |element| element.include?("/") }.split("score:").last
+  #     new_movie.critic_score = critic_score
+      
+  #     user_score_array = movie.css("div p").text.split(" ")
+  #     user_score = user_score_array.detect { |element| element.end_with?("/10") } 
+  #     new_movie.user_score = user_score
+      
+  #     sample_review = movie.css("div p").text.split("said:")[1].split("—")[0]
+  #     new_movie.sample_review = sample_review
+  #   end
+  # end
+  
+  # def print_movies
+  #   self.make_movies
+  #   Movie.all.each do |movie|
+  #     if movie.title
+  #       puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score} #{movie.user_score} #{movie.sample_review}"
+  #     end
+  #     #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
         
-    end
-  end
+  #   end
+  # end
   
 end
 
