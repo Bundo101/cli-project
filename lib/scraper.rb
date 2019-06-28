@@ -20,6 +20,10 @@ class Scraper
       
       url = movie.css("div p a").attribute("href").value
       new_movie.url = url
+      
+      critic_score_array = movie.css("div p").text.split(" ")
+      critic_score = critic_score_array.find { |element| element.include?("/") }.split("score:").last
+      new_movie.critic_score = critic_score
     end
   end
   
@@ -27,9 +31,9 @@ class Scraper
     self.make_movies
     Movie.all.each do |movie|
       if movie.title
-        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url}"
+        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score}"
       end
-       #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
+      #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
         
     end
   end
