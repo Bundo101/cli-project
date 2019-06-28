@@ -24,6 +24,11 @@ class Scraper
       critic_score_array = movie.css("div p").text.split(" ")
       critic_score = critic_score_array.find { |element| element.include?("/") }.split("score:").last
       new_movie.critic_score = critic_score
+      
+      user_score_array = movie.css("div p").text.split(" ")
+      user_score = user_score_array.detect { |element| element.end_with?("/10") } 
+      new_movie.user_score = user_score
+      #puts user_score
     end
   end
   
@@ -31,7 +36,7 @@ class Scraper
     self.make_movies
     Movie.all.each do |movie|
       if movie.title
-        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score}"
+        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score} #{movie.user_score}"
       end
       #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
         

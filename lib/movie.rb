@@ -2,7 +2,7 @@
 
 class Movie
   
-  attr_accessor :title, :year, :rank, :url, :critic_score
+  attr_accessor :title, :year, :rank, :url, :critic_score, :user_score
   
   @@all = []
   
