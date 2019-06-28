@@ -28,7 +28,9 @@ class Scraper
       user_score_array = movie.css("div p").text.split(" ")
       user_score = user_score_array.detect { |element| element.end_with?("/10") } 
       new_movie.user_score = user_score
-      #puts user_score
+      
+      sample_review = movie.css("div p").text.split("said:")[1].split("—")[0]
+      new_movie.sample_review = sample_review
     end
   end
   
@@ -36,7 +38,7 @@ class Scraper
     self.make_movies
     Movie.all.each do |movie|
       if movie.title
-        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score} #{movie.user_score}"
+        puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score} #{movie.user_score} #{movie.sample_review}"
       end
       #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
         
