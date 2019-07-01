@@ -17,14 +17,15 @@ class CLI
     input = gets.chomp
     case input 
       when (1..75)
-        found_movie = find_movie_by_rank(input)
-        puts found_movie
+        found_movie = find_movie_by_rank(input.to_i)
+        binding.pry
+        puts found_movie.title
       end
   end
   
-  def find_movie_by_rank(input)
-    Movie.all.detect { |movie| movie.rank == input }
-  end
+  # def find_movie_by_rank(input)
+  #   Movie.all.detect { |movie| movie.rank == input }    #Move this to Movie Class
+  # end
   
   def print_movie_list
      Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }
@@ -40,9 +41,9 @@ class CLI
   end
   
   def create_movies
-    scrape_website.each do |movie|
+    scrape_website.each do |movie_hash|
       new_movie = Movie.new
-      movie.each do |attribute, data|  
+      movie_hash.each do |attribute, data|  
         new_movie.send("#{attribute}=", data)
       end
     end
