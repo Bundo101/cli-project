@@ -5,7 +5,12 @@ class CLI
   
   def welcome
     puts "Greetings discerning movie patron! Welcome to the Hollywood Walk of Shame!"
-    puts "\nThe 75 worst motion pictures to ever disappoint an audience and violently offend critics have been gathered and ranked according to the magnitude of their failure."
+    puts "\nThe 75 worst motion pictures to ever disappoint an audience and violently offend critics have been ranked according to the magnitude of their failure."
+    puts "\nYou have the following options:"
+    puts "  If you would like more information on a specific rank please enter that rank as a number (eg for the worst movie enter 1 or for the 20th worst movie enter 20)."
+    puts "  Alternatively if you would like to see the top ten worst movies please enter \"topten\""
+    puts "  Or if you would like to see a random movie from this list please enter \"random\""
+    puts "  And finally if you would like to view the entire list please enter \"full\"" 
   end
   
   def print_movie_list
@@ -15,7 +20,6 @@ class CLI
   def initialize
     welcome
     create_movies
-    print_movie_list
   end
   
   def scrape_website
