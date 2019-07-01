@@ -9,7 +9,7 @@ class CLI
   end
   
   def print_movie_list
-     Movie.all.each { |movie| puts movie.title }
+     Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }
   end
   
   def initialize
