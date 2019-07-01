@@ -13,4 +13,8 @@ class Movie
     @@all
   end
   
+  def find_movie_by_rank(rank)
+    self.all.detect { |movie| movie.rank == rank }    
+  end
+  
 end
