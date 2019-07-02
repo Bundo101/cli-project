@@ -15,11 +15,10 @@ class CLI
     puts "  And finally if you would like to view the entire list please enter \"full\"" 
     raw_input = gets.chomp
     input = raw_input.to_i
-    if (1..75).include?(input) 
-      found_movie = Movie.all.detect { |movie| movie.rank == input }
-      binding.pry
+    found_movie = Movie.all.detect { |movie| movie.rank == input }
+    binding.pry
       #puts found_movie.title
-    end
+    
   end
   
   # def find_movie_by_rank(input)

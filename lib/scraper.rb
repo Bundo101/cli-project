@@ -11,7 +11,7 @@ class Scraper
     movie_details.map do |movie|
       movie_hash = {}
       basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)
-      movie_hash[:rank] = basic_movie_data[0].split(".")
+      movie_hash[:rank] = basic_movie_data[0].split(".")[0].to_i
       movie_hash[:title] = basic_movie_data[1]
       movie_hash[:year] = basic_movie_data[2].delete("()")
       url = movie.css("div p a").attribute("href").value
