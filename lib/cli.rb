@@ -6,7 +6,6 @@ class CLI
   def welcome
     puts "Greetings discerning movie patron! Welcome to the Hollywood Walk of Shame!"
     puts "\nThe 75 worst motion pictures to ever disappoint an audience and violently offend critics have been ranked according to the magnitude of their failure."
-    get_input
   end
   
   def get_input
@@ -17,8 +16,8 @@ class CLI
     raw_input = gets.chomp
     input = raw_input.to_i
     if (1..75).include?(input) 
-      puts Movie.all.detect { |movie| movie.rank == input }
-      #binding.pry
+      found_movie = Movie.all.detect { |movie| movie.rank == input }
+      binding.pry
       #puts found_movie.title
     end
   end
@@ -34,6 +33,7 @@ class CLI
   def initialize
     welcome
     create_movies
+    get_input
   end
   
   def scrape_website
