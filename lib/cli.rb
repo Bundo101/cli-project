@@ -12,12 +12,18 @@ class CLI
     puts "\nYou have the following options:"
     puts "  If you would like more information on a specific rank please enter that rank as a number (eg for the worst movie enter 1 or for the 20th worst movie enter 20)."
     puts "  Or if you would like to see a random movie from this list please enter \"random\""
-    puts "  And finally if you would like to view the entire list please enter \"full\"" 
+    puts "  And finally if you would like to view the entire list please enter \"all\"" 
     raw_input = gets.chomp
     input = raw_input.to_i
     if (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts found_movie.title                                           #Need to add and format movie info output here
+      puts found_movie.title                                          #Need to add and format movie info output here
+    elsif raw_input.downcase == "random"
+      puts Movie.all.sample.title                                     #Need to add and format movie info output here
+    elsif raw_input.downcase == "all"
+      puts Movie.all.each { |movie| puts movie.title }                #Need to add and format movie info output here
+    else
+      puts "Please enter valid input"
     end
   end
   
