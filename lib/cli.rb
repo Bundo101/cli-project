@@ -49,7 +49,7 @@ class CLI
       exit
     elsif (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts found_movie.title                                          #Need to add and format movie info output here
+      puts found_movie.title                                                    #Need to add and format movie info output here
       more_info?                                                      
       second_level(found_movie)
     elsif raw_input.downcase == "random"
@@ -58,7 +58,8 @@ class CLI
       more_info?
       second_level(random_movie)
     elsif raw_input.downcase == "all"
-      print_movie_list                                                
+      print_movie_list
+      main_menu                                                                #Need to add pause or smthg 
     else
       puts "Please enter valid input"
     end
@@ -70,7 +71,7 @@ class CLI
   
 
   def scrape_website
-    Scraper.new.scraped_data_to_array_of_hashes
+    Scraper.new.scraped_list_to_array_of_hashes
   end
   
   def create_movies

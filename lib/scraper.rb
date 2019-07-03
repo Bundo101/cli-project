@@ -6,7 +6,11 @@ class Scraper
     doc = Nokogiri::HTML(open("https://www.businessinsider.com/worst-movies-all-time-according-to-critics-2017-8?r=US&IR=T"))
   end
   
-  def scraped_data_to_array_of_hashes                            
+  def scrape_movie_page(url)
+    doc = Nokogiri::HTML(open("#{url}"))
+  end
+  
+  def scraped_list_to_array_of_hashes                            
     movie_details = self.scrape_list_page.css("div.slide")
     movie_details.map do |movie|
       movie_hash = {}
@@ -18,6 +22,10 @@ class Scraper
       movie_hash[:url] = url
       movie_hash
     end
+  end
+  
+  def scraped_movie_to_hash
+    movie_data = self.scrape_movie_page
   end
   
   # def make_movies
