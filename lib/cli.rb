@@ -9,13 +9,16 @@ class CLI
     puts "offend critics have been ranked according to the magnitude of their failure."
   end
   
-  def get_input
+  def prompt_for_input
     puts "\nYou have the following options:"
     puts "\nIf you would like more information on a specific rank please enter that" 
     puts "rank as a number from 1 to 75 (eg for the worst movie type 1 and press enter)."
     puts "\nIf you would like to see a random movie from this list please type \"random\""
     puts "\nIf you would like to view the entire list please type \"all\"" 
-    puts "\nTo close the program please type \"exit\"" 
+    puts "\nTo close the program please type \"exit\""
+  end
+  
+  def get_input
     raw_input = gets.chomp
     input = raw_input.to_i
     if (1..75).include?(input)
