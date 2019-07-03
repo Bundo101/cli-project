@@ -19,9 +19,12 @@ class CLI
   end
   
   def get_input
+    prompt_for_input
     raw_input = gets.chomp
     input = raw_input.to_i
-    if (1..75).include?(input)
+    if raw_input.downcase == "exit"
+      exit
+    elsif (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
       puts found_movie.title                                          #Need to add and format movie info output here
     elsif raw_input.downcase == "random"
