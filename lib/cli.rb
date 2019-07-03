@@ -3,6 +3,12 @@
 
 class CLI
   
+  def initialize
+    welcome
+    create_movies
+    main_menu
+  end
+  
   def welcome
     puts "Greetings discerning movie patron! Welcome to the Hollywood Walk of Shame!"
     puts "\nThe 75 worst motion pictures to ever disappoint an audience and violently" 
@@ -20,10 +26,21 @@ class CLI
   
   def more_info?
     puts "Would you like to see a sample review and the aggregate audience and critic"
-    puts "scores for this movie?"
+    puts "scores for this movie? Please type \"y\" or \"n\" and hit Enter"
   end
   
-  def get_input
+  def second_level
+    input = gets.chomp
+    if input.downcase == "y"
+      #need 2nd level scrape method here
+    elsif input.downcase == "n"
+      main_menu
+    else 
+      puts "Please enter y or n"
+    end
+  end
+  
+  def main_menu
     prompt_for_input
     raw_input = gets.chomp
     input = raw_input.to_i
@@ -33,9 +50,11 @@ class CLI
       found_movie = Movie.all.detect { |movie| movie.rank == input }
       puts found_movie.title  
       more_info?                                                      #Need to add and format movie info output here
+      second_level
     elsif raw_input.downcase == "random"
       puts Movie.all.sample.title                                     #Need to add and format movie info output here
       more_info?
+      second_level
     elsif raw_input.downcase == "all"
       Movie.all.each { |movie| puts movie.title }                #Need to add and format movie info output here
     else
@@ -43,20 +62,11 @@ class CLI
     end
   end
   
-  # def find_movie_by_rank(input)
-  #   Movie.all.detect { |movie| movie.rank == input }    #Move this to Movie Class
-  # end
-  
   def print_movie_list
      Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }
   end
   
-  def initialize
-    welcome
-    create_movies
-    get_input
-  end
-  
+
   def scrape_website
     Scraper.new.scrape_movie_details
   end
