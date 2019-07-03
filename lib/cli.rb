@@ -48,27 +48,27 @@ class CLI
       exit
     elsif (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts found_movie.title  
-      more_info?                                                      #Need to add and format movie info output here
+      puts found_movie.title                                          #Need to add and format movie info output here
+      more_info?                                                      
       second_level
     elsif raw_input.downcase == "random"
       puts Movie.all.sample.title                                     #Need to add and format movie info output here
       more_info?
       second_level
     elsif raw_input.downcase == "all"
-      Movie.all.each { |movie| puts movie.title }                #Need to add and format movie info output here
+      print_movie_list                                                
     else
       puts "Please enter valid input"
     end
   end
   
   def print_movie_list
-     Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }
+     Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }   #Need to add and format movie info output here
   end
   
 
   def scrape_website
-    Scraper.new.scrape_movie_details
+    Scraper.new.scraped_data_to_array_of_hashes
   end
   
   def create_movies

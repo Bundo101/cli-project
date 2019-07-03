@@ -6,18 +6,17 @@ class Scraper
     doc = Nokogiri::HTML(open("https://www.businessinsider.com/worst-movies-all-time-according-to-critics-2017-8?r=US&IR=T"))
   end
   
-  def scrape_movie_details                            
+  def scraped_data_to_array_of_hashes                            
     movie_details = self.scrape_list_page.css("div.slide")
     movie_details.map do |movie|
       movie_hash = {}
       basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)
-      movie_hash[:rank] = basic_movie_data[0].split(".")[0].to_i
+      movie_hash[:rank] = basic_movie_data[0].delete(".").to_i
       movie_hash[:title] = basic_movie_data[1]
       movie_hash[:year] = basic_movie_data[2].delete("()")
       url = movie.css("div p a").attribute("href").value
       movie_hash[:url] = url
       movie_hash
-      #binding.pry
     end
   end
   
@@ -45,16 +44,6 @@ class Scraper
   #   end
   # end
   
-  # def print_movies
-  #   self.make_movies
-  #   Movie.all.each do |movie|
-  #     if movie.title
-  #       puts "#{movie.rank} #{movie.title} #{movie.year} #{movie.url} #{movie.critic_score} #{movie.user_score} #{movie.sample_review}"
-  #     end
-  #     #puts movie.url unless movie.url.include?("metacritic.com") && movie.url.length < 100
-        
-  #   end
-  # end
   
 end
 
