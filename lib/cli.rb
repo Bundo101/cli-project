@@ -29,7 +29,8 @@ class CLI
     puts "scores for this movie? Please type \"y\" or \"n\" and hit Enter"
   end
   
-  def second_level
+  def second_level(movie)
+    #binding.pry
     input = gets.chomp
     if input.downcase == "y"
       #need 2nd level scrape method here
@@ -50,11 +51,12 @@ class CLI
       found_movie = Movie.all.detect { |movie| movie.rank == input }
       puts found_movie.title                                          #Need to add and format movie info output here
       more_info?                                                      
-      second_level
+      second_level(found_movie)
     elsif raw_input.downcase == "random"
-      puts Movie.all.sample.title                                     #Need to add and format movie info output here
+      random_movie = Movie.all.sample.title                                     #Need to add and format movie info output here
+      puts random_movie
       more_info?
-      second_level
+      second_level(random_movie)
     elsif raw_input.downcase == "all"
       print_movie_list                                                
     else
