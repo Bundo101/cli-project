@@ -18,6 +18,11 @@ class CLI
     puts "\nTo close the program please type \"exit\""
   end
   
+  def more_info?
+    puts "Would you like to see a sample review and the aggregate audience and critic"
+    puts "scores for this movie?"
+  end
+  
   def get_input
     prompt_for_input
     raw_input = gets.chomp
@@ -26,9 +31,11 @@ class CLI
       exit
     elsif (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts found_movie.title                                          #Need to add and format movie info output here
+      puts found_movie.title  
+      more_info?                                                      #Need to add and format movie info output here
     elsif raw_input.downcase == "random"
       puts Movie.all.sample.title                                     #Need to add and format movie info output here
+      more_info?
     elsif raw_input.downcase == "all"
       Movie.all.each { |movie| puts movie.title }                #Need to add and format movie info output here
     else
