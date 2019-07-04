@@ -32,7 +32,7 @@ class CLI
   def second_level(movie)
     input = gets.chomp
     if input.downcase == "y"
-     movie.get_extra_info
+     movie.get_extra_info                   #need to create method to trigger scrape (in movie class)
      #binding.pry
     elsif input.downcase == "n"
       main_menu
