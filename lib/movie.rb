@@ -17,4 +17,10 @@ class Movie
     self.all.detect { |movie| movie.rank == rank }    
   end
   
+  def get_extra_info
+   movie_hash = Scraper.new.scraped_movie_to_hash(self)
+   
+
+  end
+  
 end

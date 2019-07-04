@@ -32,8 +32,8 @@ class CLI
   def second_level(movie)
     input = gets.chomp
     if input.downcase == "y"
+     movie.get_extra_info
      #binding.pry
-     Scraper.new.scraped_movie_to_hash(movie.url)
     elsif input.downcase == "n"
       main_menu
     else 
@@ -77,7 +77,7 @@ class CLI
     Scraper.new.scraped_list_to_array_of_hashes
   end
   
-  def create_movies
+  def create_movies                                                           #need to move this method to movie class
     scrape_list_movies.each do |movie_hash|
       new_movie = Movie.new
       movie_hash.each do |attribute, data|  
