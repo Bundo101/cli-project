@@ -25,7 +25,10 @@ class Scraper
   end
   
   def scraped_movie_to_hash(url)
-    movie_data = self.scrape_movie_page(url).css("a.metascore_anchor").text
+    movie_scores = self.scrape_movie_page(url).css("a.metascore_anchor").text
+    movie_score_array = movie_scores.split("   ")
+    critic_score = movie_score_array[0].gsub("\n","").strip
+    user_score = movie_score_array[1].gsub("\n", "").strip
     binding.pry
   end
   
