@@ -30,10 +30,10 @@ class CLI
   end
   
   def second_level(movie)
-    #binding.pry
     input = gets.chomp
     if input.downcase == "y"
-      #need 2nd level scrape method here
+     #binding.pry
+     Scraper.new.scrape_movie_page(movie.url).scraped_movie_to_hash
     elsif input.downcase == "n"
       main_menu
     else 

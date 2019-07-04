@@ -7,7 +7,7 @@ class Scraper
   end
   
   def scrape_movie_page(url)
-    doc = Nokogiri::HTML(open("#{url}"))
+    doc = Nokogiri::HTML(open(url, 'User-Agent' => 'firefox'))
   end
   
   def scraped_list_to_array_of_hashes                            
@@ -25,7 +25,8 @@ class Scraper
   end
   
   def scraped_movie_to_hash
-    movie_data = self.scrape_movie_page
+    movie_data = self.scrape_movie_page.css("a.metascore_anchor").text
+    binding.pry
   end
   
   # def make_movies
