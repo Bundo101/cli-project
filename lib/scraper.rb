@@ -22,14 +22,18 @@ class Scraper
       movie_hash[:url] = url
       movie_hash
     end
+    binding.pry
+
   end
   
   def scraped_movie_to_hash(url)
     movie_scores = self.scrape_movie_page(url).css("a.metascore_anchor").text
+    movie_hash = {}
     movie_score_array = movie_scores.split("   ")
-    critic_score = movie_score_array[0].gsub("\n","").strip
-    user_score = movie_score_array[1].gsub("\n", "").strip
-    binding.pry
+    movie_hash[:critic_score] = movie_score_array[0].gsub("\n","").strip
+    movie_hash[:user_score] = movie_score_array[1].gsub("\n", "").strip
+    #binding.pry
+    movie_hash
   end
   
   # def make_movies
