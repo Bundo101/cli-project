@@ -33,7 +33,7 @@ class CLI
     input = gets.chomp
     if input.downcase == "y"
      #binding.pry
-     Scraper.new.scrape_movie_page(movie.url).scraped_movie_to_hash
+     Scraper.new.scraped_movie_to_hash(movie.url)
     elsif input.downcase == "n"
       main_menu
     else 
@@ -69,13 +69,16 @@ class CLI
      Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }   #Need to add and format movie info output here
   end
   
-
-  def scrape_website
+  def scrape_single_movie
+    Scraper.new
+  end
+  
+  def scrape_list_movies
     Scraper.new.scraped_list_to_array_of_hashes
   end
   
   def create_movies
-    scrape_website.each do |movie_hash|
+    scrape_list_movies.each do |movie_hash|
       new_movie = Movie.new
       movie_hash.each do |attribute, data|  
         new_movie.send("#{attribute}=", data)

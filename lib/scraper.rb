@@ -24,8 +24,8 @@ class Scraper
     end
   end
   
-  def scraped_movie_to_hash
-    movie_data = self.scrape_movie_page.css("a.metascore_anchor").text
+  def scraped_movie_to_hash(url)
+    movie_data = self.scrape_movie_page(url).css("a.metascore_anchor").text
     binding.pry
   end
   
