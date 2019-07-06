@@ -22,7 +22,7 @@ class Scraper
       movie_hash[:url] = url
       movie_hash
     end   #returns array of hashes
-    Movie.create_movies(array_of_hashes)
+    # Movie.create_movies(array_of_hashes)
     #binding.pry
 
   end

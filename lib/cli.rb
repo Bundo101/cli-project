@@ -33,6 +33,7 @@ class CLI
     input = gets.chomp
     if input.downcase == "y"
       movie.get_extra_info                   #need to create method to trigger scrape (in movie class)
+      puts movie.title
       #binding.pry
     elsif input.downcase == "n"
       main_menu
@@ -78,13 +79,9 @@ class CLI
   # end
   
   def create_movies                                                           #need to move this method to movie class
-    Scraper.new.scraped_list_to_array_of_hashes
-    # scrape_list_movies.each do |movie_hash|
-    #   new_movie = Movie.new
-    #   movie_hash.each do |attribute, data|  
-    #     new_movie.send("#{attribute}=", data)
-    #   end
-    # end
+    Movie.prepare_movies
+    # Scraper.new.scraped_list_to_array_of_hashes
+ 
   end
   
 end
