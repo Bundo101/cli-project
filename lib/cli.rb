@@ -32,8 +32,8 @@ class CLI
   def second_level(movie)
     input = gets.chomp
     if input.downcase == "y"
-     movie.get_extra_info                   #need to create method to trigger scrape (in movie class)
-     #binding.pry
+      movie.get_extra_info                   #need to create method to trigger scrape (in movie class)
+      #binding.pry
     elsif input.downcase == "n"
       main_menu
     else 
@@ -69,21 +69,22 @@ class CLI
      Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }   #Need to add and format movie info output here
   end
   
-  def scrape_single_movie
-    Scraper.new
-  end
+  # def scrape_single_movie
+  #   Scraper.new
+  # end
   
-  def scrape_list_movies
-    Scraper.new.scraped_list_to_array_of_hashes
-  end
+  # def scrape_list_movies
+  #   Scraper.new.scraped_list_to_array_of_hashes
+  # end
   
   def create_movies                                                           #need to move this method to movie class
-    scrape_list_movies.each do |movie_hash|
-      new_movie = Movie.new
-      movie_hash.each do |attribute, data|  
-        new_movie.send("#{attribute}=", data)
-      end
-    end
+    Scraper.new.scraped_list_to_array_of_hashes
+    # scrape_list_movies.each do |movie_hash|
+    #   new_movie = Movie.new
+    #   movie_hash.each do |attribute, data|  
+    #     new_movie.send("#{attribute}=", data)
+    #   end
+    # end
   end
   
 end

@@ -12,7 +12,7 @@ class Scraper
   
   def scraped_list_to_array_of_hashes                            
     movie_details = self.scrape_list_page.css("div.slide")
-    movie_details.map do |movie|
+    array_of_hashes = movie_details.map do |movie|
       movie_hash = {}
       basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)
       movie_hash[:rank] = basic_movie_data[0].delete(".").to_i
@@ -22,18 +22,19 @@ class Scraper
       movie_hash[:url] = url
       movie_hash
     end
+    Movie.create_movies(array_of_hashes)
     #binding.pry
 
   end
   
-  def scraped_movie_to_hash(movie)
-    binding.pry
-    movie_scores = self.scrape_movie_page(movie.url).css("a.metascore_anchor").text
+  def scraped_movie_to_hash(movie_object)
+    #binding.pry
+    movie_scores = self.scrape_movie_page(movie_object.url).css("a.metascore_anchor").text
     movie_hash = {}
     movie_score_array = movie_scores.split("   ")
     movie_hash[:critic_score] = movie_score_array[0].gsub("\n","").strip
     movie_hash[:user_score] = movie_score_array[1].gsub("\n", "").strip
-    binding.pry
+    #binding.pry
     movie_hash
   end
   

@@ -13,8 +13,19 @@ class Movie
     @@all
   end
   
-  def find_movie_by_rank(rank)
-    self.all.detect { |movie| movie.rank == rank }    
+  # def find_movie_by_rank(rank)
+  #   self.all.detect { |movie| movie.rank == rank }    
+  # end
+  
+  def self.create_movies(array_of_hashes)
+    array_of_hashes.each do |hash|
+      #binding.pry
+      new_movie = Movie.new
+      hash.each do |attribute, data|  
+        new_movie.send("#{attribute}=", data)
+      end
+    end
+  puts self.all
   end
   
   def get_extra_info
