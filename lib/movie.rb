@@ -13,10 +13,6 @@ class Movie
     @@all
   end
   
-  # def find_movie_by_rank(rank)
-  #   self.all.detect { |movie| movie.rank == rank }    
-  # end
-  
   def self.create_movies(array_of_hashes)
     array_of_hashes.each do |hash|
       #binding.pry
@@ -25,12 +21,17 @@ class Movie
         new_movie.send("#{attribute}=", data)
       end
     end
-  puts self.all
   end
   
   def get_extra_info
-   movie_hash = Scraper.new.scraped_movie_to_hash(self)
-   
+    #binding.pry
+    movie_hash = Scraper.new.scraped_movie_to_hash(self)
+    movie_hash.each do |attribute, data|  
+      self.send("#{attribute}=", data)
+    end
+    
+    
+    binding.pry
 
   end
   

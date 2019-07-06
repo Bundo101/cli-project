@@ -21,7 +21,7 @@ class Scraper
       url = movie.css("div p a").attribute("href").value
       movie_hash[:url] = url
       movie_hash
-    end
+    end   #returns array of hashes
     Movie.create_movies(array_of_hashes)
     #binding.pry
 
