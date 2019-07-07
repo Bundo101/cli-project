@@ -16,7 +16,7 @@ class CLI
   end
   
   def prompt_for_input
-    puts "\nIf you would like more information on a specific rank please enter that" 
+    puts "\nIf you would like more information on a specific movie please enter that movie's" 
     puts "rank as a number from 1 to 75 (eg for the worst movie type 1 and press enter)."
     puts "\nIf you would like to see a random movie from this list please type \"random\""
     puts "\nIf you would like to view the entire list please type \"all\"" 
@@ -31,8 +31,8 @@ class CLI
   def second_level(movie)
     input = gets.chomp
     if input.downcase == "y"
-      movie.get_extra_info                   #need to create method to trigger scrape (in movie class)
-      puts "#{movie.title}"
+      movie.get_extra_info                   
+      puts "#{movie.title}, #{movie.sample_review}"
     elsif input.downcase == "n"
       main_menu
     else 
@@ -50,12 +50,12 @@ class CLI
       exit
     elsif (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."      #Need to add and format movie info output here
+      puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."     
       more_info?                                                      
       second_level(found_movie)
       main_menu
     elsif raw_input.downcase == "random"
-      random_movie = Movie.all.sample                                                                               #Need to add and format movie info output here
+      random_movie = Movie.all.sample                                                                               
       puts "\nNumber #{random_movie.rank}. #{random_movie.title} was released in cinemas in #{random_movie.year}."
       more_info?
       second_level(random_movie)
@@ -73,7 +73,7 @@ class CLI
      Movie.all.each { |movie| puts "\n#{movie.rank} #{movie.title}" }   #Need to add and format movie info output here
   end
   
-  def create_movies                                                           #need to move this method to movie class
+  def create_movies                                                           
     Movie.prepare_movies
   end
   

@@ -20,6 +20,8 @@ class Scraper
       movie_hash[:year] = basic_movie_data[2].delete("()")
       url = movie.css("div p a").attribute("href").value
       movie_hash[:url] = url
+      sample_review = movie.text.split("said:")[1].split("—")[0]
+      movie_hash[:sample_review] = sample_review
       movie_hash
     end   #returns array of hashes
   end
