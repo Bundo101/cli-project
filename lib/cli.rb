@@ -24,20 +24,21 @@ class CLI
   end
   
   def more_info?
-    puts "Would you like to see a sample review and the aggregate audience and critic"
-    puts "scores for this movie? Please type \"y\" or \"n\" and hit Enter"
+    puts "\nEnter \"y\" to see a sample review and the aggregate audience and critic"
+    puts "scores for this movie or \"n\" to return to the main menu."
   end
   
   def second_level(movie)
     input = gets.chomp
     if input.downcase == "y"
       movie.get_extra_info                   #need to create method to trigger scrape (in movie class)
-      puts movie.title
-      #binding.pry
+      puts "#{movie.title}"
     elsif input.downcase == "n"
       main_menu
     else 
-      puts "Please enter y or n"
+      puts "\nInvalid input, please enter \"y\" to see more information"
+      puts "about #{movie.title} or \"n\" to return to the main menu."
+      second_level(movie)
     end
   end
   
@@ -49,13 +50,13 @@ class CLI
       exit
     elsif (1..75).include?(input)
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts found_movie.title                                                    #Need to add and format movie info output here
+      puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."      #Need to add and format movie info output here
       more_info?                                                      
       second_level(found_movie)
       main_menu
     elsif raw_input.downcase == "random"
-      random_movie = Movie.all.sample                                     #Need to add and format movie info output here
-      puts random_movie.title
+      random_movie = Movie.all.sample                                                                               #Need to add and format movie info output here
+      puts "\nNumber #{random_movie.rank}. #{random_movie.title} was released in cinemas in #{random_movie.year}."
       more_info?
       second_level(random_movie)
       main_menu
@@ -64,11 +65,12 @@ class CLI
       main_menu                                                                #Need to add pause or smthg 
     else
       puts "Please enter valid input"
+      main_menu
     end
   end
   
   def print_movie_list
-     Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }   #Need to add and format movie info output here
+     Movie.all.each { |movie| puts "\n#{movie.rank} #{movie.title}" }   #Need to add and format movie info output here
   end
   
   def create_movies                                                           #need to move this method to movie class

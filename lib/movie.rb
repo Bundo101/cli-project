@@ -25,9 +25,11 @@ class Movie
   end
   
   def get_extra_info
-    movie_hash = Scraper.new.scraped_movie_to_hash(self)
-    movie_hash.each do |attribute, data|  
-      self.send("#{attribute}=", data)
+    unless self.critic_score  
+      movie_hash = Scraper.new.scraped_movie_to_hash(self)
+      movie_hash.each do |attribute, data|  
+        self.send("#{attribute}=", data)
+      end
     end
   end
   
