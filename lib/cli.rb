@@ -16,7 +16,6 @@ class CLI
   end
   
   def prompt_for_input
-    puts "\nYou have the following options:"
     puts "\nIf you would like more information on a specific rank please enter that" 
     puts "rank as a number from 1 to 75 (eg for the worst movie type 1 and press enter)."
     puts "\nIf you would like to see a random movie from this list please type \"random\""
@@ -53,11 +52,13 @@ class CLI
       puts found_movie.title                                                    #Need to add and format movie info output here
       more_info?                                                      
       second_level(found_movie)
+      main_menu
     elsif raw_input.downcase == "random"
-      random_movie = Movie.all.sample.title                                     #Need to add and format movie info output here
-      puts random_movie
+      random_movie = Movie.all.sample                                     #Need to add and format movie info output here
+      puts random_movie.title
       more_info?
       second_level(random_movie)
+      main_menu
     elsif raw_input.downcase == "all"
       print_movie_list
       main_menu                                                                #Need to add pause or smthg 
@@ -70,18 +71,8 @@ class CLI
      Movie.all.each { |movie| puts "#{movie.rank} #{movie.title} - #{movie.year}" }   #Need to add and format movie info output here
   end
   
-  # def scrape_single_movie
-  #   Scraper.new
-  # end
-  
-  # def scrape_list_movies
-  #   Scraper.new.scraped_list_to_array_of_hashes
-  # end
-  
   def create_movies                                                           #need to move this method to movie class
     Movie.prepare_movies
-    # Scraper.new.scraped_list_to_array_of_hashes
- 
   end
   
 end

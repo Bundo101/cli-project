@@ -22,9 +22,6 @@ class Scraper
       movie_hash[:url] = url
       movie_hash
     end   #returns array of hashes
-    # Movie.create_movies(array_of_hashes)
-    #binding.pry
-
   end
   
   def scraped_movie_to_hash(movie_object)
@@ -37,34 +34,5 @@ class Scraper
     #binding.pry
     movie_hash
   end
-  
-  
-  
-  # def make_movies
-  #   self.get_movies.each do |movie|
-  #     new_movie = Movie.new
-      
-  #     basic_movie_data = movie.css("h2.slide-title-text").text
-  #     rank, title, year = basic_movie_data.split("\"").map(&:strip)
-  #     new_movie.rank, new_movie.title, new_movie.year = rank, title, year
-      
-  #     url = movie.css("div p a").attribute("href").value
-  #     new_movie.url = url
-      
-  #     critic_score_array = movie.css("div p").text.split(" ")
-  #     critic_score = critic_score_array.find { |element| element.include?("/") }.split("score:").last
-  #     new_movie.critic_score = critic_score
-      
-  #     user_score_array = movie.css("div p").text.split(" ")
-  #     user_score = user_score_array.detect { |element| element.end_with?("/10") } 
-  #     new_movie.user_score = user_score
-      
-  #     sample_review = movie.css("div p").text.split("said:")[1].split("—")[0]
-  #     new_movie.sample_review = sample_review
-  #   end
-  # end
-  
-  
-end
 
-#url = page.css("div.slide").css("div p a").attribute("href").value
+end

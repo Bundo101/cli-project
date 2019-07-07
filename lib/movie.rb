@@ -24,17 +24,6 @@ class Movie
     end
   end
   
-  
-  # def self.create_movies(array_of_hashes)
-  #   array_of_hashes.each do |hash|
-  #     #binding.pry
-  #     new_movie = Movie.new
-  #     hash.each do |attribute, data|  
-  #       new_movie.send("#{attribute}=", data)
-  #     end
-  #   end
-  # end
-  
   def get_extra_info
     #binding.pry
     movie_hash = Scraper.new.scraped_movie_to_hash(self)
