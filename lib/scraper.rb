@@ -32,8 +32,14 @@ class Scraper
     movie_hash = {}
     movie_score_array = movie_scores.split("   ")
     movie_hash[:critic_score] = movie_score_array[0].gsub("\n","").strip
-    movie_hash[:user_score] = movie_score_array[1].gsub("\n", "").strip
-    #binding.pry
+    if /\d/.match(movie_score_array[2]) 
+      movie_hash[:user_score] = "#{movie_score_array[1].gsub("\n", "").strip}/10"
+    else
+      movie_hash[:user_score] = "TBD"
+    end
+    # if movie_score_array[2].include?
+    #   movie_hash[:user_score] = movie_score_array[1].gsub("\n", "").strip
+    # #binding.pry
     movie_hash
   end
 

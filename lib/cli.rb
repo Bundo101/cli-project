@@ -33,6 +33,8 @@ class CLI
     if input.downcase == "y"
       movie.get_extra_info                   
       puts "#{movie.title}, #{movie.sample_review}"
+      
+      puts "Audience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"
     elsif input.downcase == "n"
       main_menu
     else 
@@ -62,7 +64,7 @@ class CLI
       main_menu
     elsif raw_input.downcase == "all"
       print_movie_list
-      main_menu                                                                #Need to add pause or smthg 
+      main_menu                                                                
     else
       puts "Please enter valid input"
       main_menu
