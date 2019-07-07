@@ -25,12 +25,10 @@ class Movie
   end
   
   def get_extra_info
-    #binding.pry
     movie_hash = Scraper.new.scraped_movie_to_hash(self)
     movie_hash.each do |attribute, data|  
       self.send("#{attribute}=", data)
     end
-    #binding.pry
   end
   
 end
