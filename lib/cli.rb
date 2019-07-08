@@ -5,7 +5,7 @@ class CLI
   
   def initialize
     welcome
-    create_movies
+    create_movies             #move all these out of initialize => replace with start method in bin/run
     main_menu
   end
   
@@ -46,29 +46,25 @@ class CLI
   
   def main_menu
     prompt_for_input
-    raw_input = gets.chomp
-    input = raw_input.to_i
-    if raw_input.downcase == "exit"
+    input = gets.chomp                    #lines 49 & 50 into #prompt_for_input
+    if input.downcase == "exit"
       exit
-    elsif (1..75).include?(input)
+    elsif (1..75).include?(input.to_i)  
       found_movie = Movie.all.detect { |movie| movie.rank == input }
-      puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."     
+      puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."     #abstract out 54 & 59 to separate method
       more_info?                                                      
       second_level(found_movie)
-      main_menu
     elsif raw_input.downcase == "random"
       random_movie = Movie.all.sample                                                                               
       puts "\nNumber #{random_movie.rank}. #{random_movie.title} was released in cinemas in #{random_movie.year}."
       more_info?
       second_level(random_movie)
-      main_menu
     elsif raw_input.downcase == "all"
       print_movie_list
-      main_menu                                                                
     else
       puts "Please enter valid input"
-      main_menu
     end
+    main_menu
   end
   
   def print_movie_list

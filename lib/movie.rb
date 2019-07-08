@@ -6,7 +6,7 @@ class Movie
   @@all = []
   
   def initialize
-    @@all << self
+    @@all << self             #create separate save method
   end
   
   def self.all
@@ -17,7 +17,7 @@ class Movie
     array_of_hashes = Scraper.new.scraped_list_to_array_of_hashes
     array_of_hashes.each do |hash|
       #binding.pry
-      new_movie = self.new
+      new_movie = self.create(args)                                   #use #create or #initialize to populate attributes
       hash.each do |attribute, data|  
         new_movie.send("#{attribute}=", data)
       end

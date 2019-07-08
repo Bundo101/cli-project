@@ -15,9 +15,9 @@ class Scraper
     array_of_hashes = movie_details.map do |movie|
       movie_hash = {}
       basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)
-      movie_hash[:rank] = basic_movie_data[0].delete(".").to_i
+      movie_hash[:rank] = basic_movie_data[0].delete(".").to_i                                  #abstract out the hash creation
       movie_hash[:title] = basic_movie_data[1]
-      movie_hash[:year] = basic_movie_data[2].delete("()")
+      movie_hash[:year] = basic_movie_data[2].delete("()")                                      #check if scrape selectors can be improved
       url = movie.css("div p a").attribute("href").value
       movie_hash[:url] = url
       sample_review = movie.text.split("said:")[1].split("—")[0]
@@ -27,10 +27,10 @@ class Scraper
   end
   
   def scraped_movie_to_hash(movie_object)
+    binding.pry
     scraped_movie_page = self.scrape_movie_page(movie_object.url)
     movie_scores = scraped_movie_page.css("a.metascore_anchor").text
-    plot_summary = scraped_movie_page.css("div.summary_deck span span").text
-    binding.pry
+    plot_summary = scraped_movie_page.css("div.summary_deck span span").text                  #check if scrape selectors can be improved
     movie_hash = {}
     movie_score_array = movie_scores.split("   ")
     movie_hash[:critic_score] = movie_score_array[0].gsub("\n","").strip
