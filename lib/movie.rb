@@ -1,7 +1,7 @@
 
 class Movie
   
-  attr_accessor :title, :year, :rank, :url, :critic_score, :user_score, :sample_review
+  attr_accessor :title, :year, :rank, :url, :critic_score, :user_score, :sample_review, :plot_summary
   
   @@all = []
   

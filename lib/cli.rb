@@ -32,7 +32,7 @@ class CLI
     input = gets.chomp
     if input.downcase == "y"
       movie.get_extra_info                   
-      puts "#{movie.title}, #{movie.sample_review}"
+      puts "#{movie.title}, #{movie.plot_summary}"
       
       puts "Audience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"
     elsif input.downcase == "n"

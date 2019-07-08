@@ -27,8 +27,10 @@ class Scraper
   end
   
   def scraped_movie_to_hash(movie_object)
-    #binding.pry
-    movie_scores = self.scrape_movie_page(movie_object.url).css("a.metascore_anchor").text
+    scraped_movie_page = self.scrape_movie_page(movie_object.url)
+    movie_scores = scraped_movie_page.css("a.metascore_anchor").text
+    plot_summary = scraped_movie_page.css("div.summary_deck span span").text
+    binding.pry
     movie_hash = {}
     movie_score_array = movie_scores.split("   ")
     movie_hash[:critic_score] = movie_score_array[0].gsub("\n","").strip
@@ -37,9 +39,7 @@ class Scraper
     else
       movie_hash[:user_score] = "TBD"
     end
-    # if movie_score_array[2].include?
-    #   movie_hash[:user_score] = movie_score_array[1].gsub("\n", "").strip
-    # #binding.pry
+    movie_hash[:plot_summary] = plot_summary
     movie_hash
   end
 
