@@ -50,16 +50,17 @@ class CLI
     if input.downcase == "exit"
       exit
     elsif (1..75).include?(input.to_i)  
-      found_movie = Movie.all.detect { |movie| movie.rank == input }
+      #binding.pry
+      found_movie = Movie.all.detect { |movie| movie.rank == input.to_i }
       puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."     #abstract out 54 & 59 to separate method
       more_info?                                                      
       second_level(found_movie)
-    elsif raw_input.downcase == "random"
+    elsif input.downcase == "random"
       random_movie = Movie.all.sample                                                                               
       puts "\nNumber #{random_movie.rank}. #{random_movie.title} was released in cinemas in #{random_movie.year}."
       more_info?
       second_level(random_movie)
-    elsif raw_input.downcase == "all"
+    elsif input.downcase == "all"
       print_movie_list
     else
       puts "Please enter valid input"
