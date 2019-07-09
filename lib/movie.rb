@@ -5,12 +5,12 @@ class Movie
   
   @@all = []
   
-  def initialize(hash)
-    @title = hash[:title]
-    @year = hash[:year]
-    @rank = hash[:rank]
-    @url = hash[:url]
-    @sample_review = hash[:sample_review]
+  def initialize(movie_info)
+    @title = movie_info[:title]
+    @year = movie_info[:year]
+    @rank = movie_info[:rank]
+    @url = movie_info[:url]
+    @sample_review = movie_info[:sample_review]
   end
   
   def self.all

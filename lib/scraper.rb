@@ -10,6 +10,10 @@ class Scraper
     doc = Nokogiri::HTML(open(url, 'User-Agent' => 'firefox'))
   end
   
+  def create_hash
+    
+  end
+  
   def scraped_list_to_array_of_hashes                            
     movie_details = self.scrape_list_page.css("div.slide")
     array_of_hashes = movie_details.map do |movie|
@@ -27,7 +31,7 @@ class Scraper
   end
   
   def scraped_movie_to_hash(movie_object)
-    binding.pry
+    #binding.pry
     scraped_movie_page = self.scrape_movie_page(movie_object.url)
     movie_scores = scraped_movie_page.css("a.metascore_anchor").text
     plot_summary = scraped_movie_page.css("div.summary_deck span span").text                  #check if scrape selectors can be improved
