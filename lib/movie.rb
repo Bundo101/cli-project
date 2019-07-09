@@ -6,11 +6,19 @@ class Movie
   @@all = []
   
   def initialize
-    @@all << self             #create separate save method
+
   end
   
   def self.all
     @@all
+  end
+  
+  def save
+    @@all << self
+  end
+  
+  def self.create
+    
   end
   
   def self.prepare_movies
