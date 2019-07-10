@@ -24,7 +24,11 @@ class Scraper
     movie_details = self.scrape_list_page.css("div.slide")
     array_of_hashes = movie_details.map do |movie|
       basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)      
-      url = movie.css("div p a").attribute("href").value                                      #check if scrape selectors can be improved
+      if movie.css("div p a").attribute("href").value.include?("www.metacritic.com/")
+        url = movie.css("div p a").attribute("href").value                                      #check if scrape selectors can be improved
+      elsif movie.css("div p a")[1].attribute("href").value.include?("www.metacritic.com/")
+        url = movie.css("div p a")[1].attribute("href").value
+      end
       sample_review = movie.text.split("said:")[1].split("—")[0]
       create_hash(basic_movie_data, url, sample_review)
     end   #returns array of hashes
