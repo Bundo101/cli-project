@@ -38,7 +38,7 @@ class CLI
       movie.get_extra_info                   
       puts "#{movie.title}, #{movie.plot_summary}"
       
-      puts "Audience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"
+      puts "Audience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"     #need to fix /10 for audience score if score is tbd (number 30)
     elsif input.downcase == "n"
       main_menu
     else 

@@ -33,16 +33,6 @@ class Movie
     end
   end
   
-  # def self.prepare_movies
-  #   array_of_hashes = Scraper.new.scraped_list_to_array_of_hashes
-  #   array_of_hashes.each do |hash|
-  #     new_movie = self.create(args)                                   #use #create or #initialize to populate attributes
-  #     hash.each do |attribute, data|  
-  #       new_movie.send("#{attribute}=", data)
-  #     end
-  #   end
-  # end
-  
   def get_extra_info
     unless self.critic_score  
       movie_hash = Scraper.new.scraped_movie_to_hash(self)
