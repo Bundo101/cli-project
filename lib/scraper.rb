@@ -10,28 +10,27 @@ class Scraper
     doc = Nokogiri::HTML(open(url, 'User-Agent' => 'firefox'))
   end
   
-  def create_hash
-    
+  def create_hash(basic_movie_data, url, sample_review)
+    movie_hash = {}
+    movie_hash[:rank] = basic_movie_data[0].delete(".").to_i                                  
+    movie_hash[:title] = basic_movie_data[1]
+    movie_hash[:year] = basic_movie_data[2].delete("()")
+    movie_hash[:url] = url
+    movie_hash[:sample_review] = sample_review
+    movie_hash
   end
   
   def scraped_list_to_array_of_hashes                            
     movie_details = self.scrape_list_page.css("div.slide")
     array_of_hashes = movie_details.map do |movie|
-      movie_hash = {}
-      basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)
-      movie_hash[:rank] = basic_movie_data[0].delete(".").to_i                                  #abstract out the hash creation
-      movie_hash[:title] = basic_movie_data[1]
-      movie_hash[:year] = basic_movie_data[2].delete("()")                                      #check if scrape selectors can be improved
-      url = movie.css("div p a").attribute("href").value
-      movie_hash[:url] = url
+      basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)      
+      url = movie.css("div p a").attribute("href").value                                      #check if scrape selectors can be improved
       sample_review = movie.text.split("said:")[1].split("—")[0]
-      movie_hash[:sample_review] = sample_review
-      movie_hash
+      create_hash(basic_movie_data, url, sample_review)
     end   #returns array of hashes
   end
   
   def scraped_movie_to_hash(movie_object)
-    #binding.pry
     scraped_movie_page = self.scrape_movie_page(movie_object.url)
     movie_scores = scraped_movie_page.css("a.metascore_anchor").text
     plot_summary = scraped_movie_page.css("div.summary_deck span span").text                  #check if scrape selectors can be improved

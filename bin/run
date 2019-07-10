@@ -2,5 +2,5 @@
 
 require_relative '../config/environment'
 
-CLI.new
+CLI.new.start
 #Scraper.new.scrape_movie_details

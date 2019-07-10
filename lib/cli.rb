@@ -4,8 +4,12 @@
 class CLI
   
   def initialize
+                 
+  end
+  
+  def start
     welcome
-    create_movies             #move all these out of initialize => replace with start method in bin/run
+    create_movies
     main_menu
   end
   
