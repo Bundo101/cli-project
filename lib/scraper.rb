@@ -37,7 +37,11 @@ class Scraper
   def scraped_movie_to_hash(movie_object)
     scraped_movie_page = self.scrape_movie_page(movie_object.url)
     movie_scores = scraped_movie_page.css("a.metascore_anchor").text
-    plot_summary = scraped_movie_page.css("div.summary_deck span span").text                  #check if scrape selectors can be improved
+    if scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text != ""
+      plot_summary = scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text
+    else  
+      plot_summary = scraped_movie_page.css("div.summary_deck span span").text                  #check if scrape selectors can be improved
+    end
     movie_hash = {}
     movie_score_array = movie_scores.split("   ")
     movie_hash[:critic_score] = movie_score_array[0].gsub("\n","").strip
