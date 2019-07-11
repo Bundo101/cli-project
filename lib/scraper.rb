@@ -29,7 +29,7 @@ class Scraper
       else 
         url = movie.css("div p a")[1].attribute("href").value
       end
-      sample_review = movie.text.split("said:")[1].split("—")[0]
+      sample_review = movie.text.split("said:")[1].split("\"")[1]
       create_hash(basic_movie_data, url, sample_review)
     end   #returns array of hashes
   end
