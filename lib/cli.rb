@@ -1,6 +1,3 @@
-# require_relative './scraper.rb'
-# require_relative './movie.rb'
-
 class CLI
   
   def initialize
@@ -56,12 +53,12 @@ class CLI
     elsif (1..75).include?(input.to_i)  
       #binding.pry
       found_movie = Movie.all.detect { |movie| movie.rank == input.to_i }
-      puts "\nNumber #{found_movie.rank}. #{found_movie.title} was released in cinemas in #{found_movie.year}."     #abstract out 54 & 59 to separate method
+      print_basic_movie_data(found_movie)                                              #abstract out 54 & 59 to separate method
       more_info?                                                      
       second_level(found_movie)
     elsif input.downcase == "random"
       random_movie = Movie.all.sample                                                                               
-      puts "\nNumber #{random_movie.rank}. #{random_movie.title} was released in cinemas in #{random_movie.year}."
+      print_basic_movie_data(random_movie)
       more_info?
       second_level(random_movie)
     elsif input.downcase == "all"
@@ -70,6 +67,10 @@ class CLI
       puts "Please enter valid input"
     end
     main_menu
+  end
+  
+  def print_basic_movie_data(movie)
+    puts "\nNumber #{movie.rank}. #{movie.title} was released in cinemas in #{movie.year}."
   end
   
   def print_movie_list
