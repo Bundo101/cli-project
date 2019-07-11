@@ -37,17 +37,16 @@ class Scraper
   def scraped_movie_to_hash(movie_object)
     scraped_movie_page = self.scrape_movie_page(movie_object.url)
     movie_hash = {}
+    
     expanded_summary = scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text
     basic_summary = scraped_movie_page.css("div.summary_deck span span").text
-    if expanded_summary != ""
-      plot_summary = expanded_summary
-    else  
-      plot_summary = basic_summary                                                                       #refactor conditionals?
-    end
+    expanded_summary != "" ? plot_summary = expanded_summary : plot_summary = basic_summary                                                                   #refactor conditionals?
     
     movie_hash[:critic_score] = scraped_movie_page.css("div.metascore_w.larger:not(.user)").text
-    if scraped_movie_page.css("div.metascore_w.user.larger").text != ""
-      movie_hash[:user_score] = "#{scraped_movie_page.css("div.metascore_w.user.larger").text}/10"
+    
+    user_score = scraped_movie_page.css("div.metascore_w.user.larger").text
+    if user_score != ""
+      movie_hash[:user_score] = "#{user_score}/10"
     else
       movie_hash[:user_score] = "tbd"
     end
