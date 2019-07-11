@@ -22,7 +22,7 @@ class Scraper
   
   def scraped_list_to_array_of_hashes                            
     movie_details = self.scrape_list_page.css("div.slide")
-    array_of_hashes = movie_details.map do |movie|
+    movie_details.map do |movie|
       basic_movie_data = movie.css("h2.slide-title-text").text.split("\"").map(&:strip)      
       if movie.css("div p a").attribute("href").value.include?("www.metacritic.com/")
         url = movie.css("div p a").attribute("href").value                                      #refactor conditional?
@@ -37,11 +37,12 @@ class Scraper
   def scraped_movie_to_hash(movie_object)
     scraped_movie_page = self.scrape_movie_page(movie_object.url)
     movie_hash = {}
-    
-    if scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text != ""
-      plot_summary = scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text
+    expanded_summary = scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text
+    basic_summary = scraped_movie_page.css("div.summary_deck span span").text
+    if expanded_summary != ""
+      plot_summary = expanded_summary
     else  
-      plot_summary = scraped_movie_page.css("div.summary_deck span span").text                           #refactor conditionals?
+      plot_summary = basic_summary                                                                       #refactor conditionals?
     end
     
     movie_hash[:critic_score] = scraped_movie_page.css("div.metascore_w.larger:not(.user)").text

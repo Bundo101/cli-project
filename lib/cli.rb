@@ -22,6 +22,11 @@ class CLI
     puts "\nIf you would like to see a random movie from this list please type \"random\""
     puts "\nIf you would like to view the entire list please type \"all\"" 
     puts "\nTo close the program please type \"exit\""
+    input = gets.chomp                    
+    if input.downcase == "exit"
+      exit
+    end
+    input
   end
   
   def more_info?
@@ -34,7 +39,7 @@ class CLI
     if input.downcase == "y"
       movie.get_extra_info                   
       puts "#{movie.title}: #{movie.plot_summary}"
-      puts "\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"     #need to fix /10 for audience score if score is tbd (number 30)
+      puts "\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"     
       puts "\nWhat the critics thought: #{movie.sample_review}"
     elsif input.downcase == "n"
       main_menu
@@ -46,22 +51,19 @@ class CLI
   end
   
   def main_menu
-    prompt_for_input
-    input = gets.chomp                    #lines 49 & 50 into #prompt_for_input
-    if input.downcase == "exit"
-      exit
-    elsif (1..75).include?(input.to_i)  
-      #binding.pry
-      found_movie = Movie.all.detect { |movie| movie.rank == input.to_i }
-      print_basic_movie_data(found_movie)                                              #abstract out 54 & 59 to separate method
+    input = prompt_for_input
+    case 
+    when (1..75).include?(input.to_i)  
+      found_movie = Movie.all.detect { |movie| movie.rank == input.to_i }           #move class finder to Movie class
+      print_basic_movie_data(found_movie)                                              
       more_info?                                                      
       second_level(found_movie)
-    elsif input.downcase == "random"
+    when input.downcase == "random"
       random_movie = Movie.all.sample                                                                               
       print_basic_movie_data(random_movie)
       more_info?
       second_level(random_movie)
-    elsif input.downcase == "all"
+    when input.downcase == "all"
       print_movie_list
     else
       puts "Please enter valid input"
