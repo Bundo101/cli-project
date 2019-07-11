@@ -25,8 +25,8 @@ class CLI
   end
   
   def more_info?
-    puts "\nEnter \"y\" to see a sample review and the aggregate audience and critic"
-    puts "scores for this movie or \"n\" to return to the main menu."
+    puts "\nEnter \"y\" to see the plot summary, a sample review and the aggregate"
+    puts "audience and critic scores for this movie or \"n\" to return to the main menu."
   end
   
   def second_level(movie)
