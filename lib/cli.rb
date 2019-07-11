@@ -74,8 +74,7 @@ class CLI
   end
   
   def print_movie_list
-     Movie.all.each { |movie| puts "\n#{movie.rank} #{movie.title}" }   #Need to add and format movie info output here
-     binding.pry
+     Movie.all.each { |movie| puts "\n#{movie.rank}. #{movie.title} (#{movie.year})" }   #Need to add and format movie info output here
   end
   
   def create_movies                                                           
