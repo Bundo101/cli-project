@@ -39,11 +39,15 @@ class Scraper
     if scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text != ""
       plot_summary = scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text
     else  
-      plot_summary = scraped_movie_page.css("div.summary_deck span span").text                           #refactor conditional?
+      plot_summary = scraped_movie_page.css("div.summary_deck span span").text                           #refactor conditionals?
     end
     movie_hash = {}
     movie_hash[:critic_score] = scraped_movie_page.css("div.metascore_w.larger:not(.user)").text
-    movie_hash[:user_score] = scraped_movie_page.css("div.metascore_w.user.larger").text
+    if scraped_movie_page.css("div.metascore_w.user.larger").text != ""
+      movie_hash[:user_score] = scraped_movie_page.css("div.metascore_w.user.larger").text
+    else
+      movie_hash[:user_score] = "tbd"
+    end
     movie_hash[:plot_summary] = plot_summary
     movie_hash
   end

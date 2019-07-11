@@ -34,7 +34,6 @@ class CLI
     if input.downcase == "y"
       movie.get_extra_info                   
       puts "#{movie.title}: #{movie.plot_summary}"
-      
       puts "\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"     #need to fix /10 for audience score if score is tbd (number 30)
       puts "\nWhat the critics thought: #{movie.sample_review}"
     elsif input.downcase == "n"
