@@ -54,7 +54,7 @@ class CLI
     input = prompt_for_input
     case 
     when (1..75).include?(input.to_i)  
-      found_movie = Movie.all.detect { |movie| movie.rank == input.to_i }           #move class finder to Movie class
+      found_movie = Movie.find_by_rank(input.to_i)           #move class finder to Movie class
       print_basic_movie_data(found_movie)                                              
       more_info?                                                      
       second_level(found_movie)

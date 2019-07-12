@@ -26,6 +26,10 @@ class Movie
     new_movie.save
   end
   
+  def self.find_by_rank(user_input)
+    self.all.detect { |movie| movie.rank == user_input } 
+  end
+  
   def self.prepare_movies
     array_of_hashes = Scraper.new.scraped_list_to_array_of_hashes
     array_of_hashes.each do |hash|
