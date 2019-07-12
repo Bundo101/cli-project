@@ -28,12 +28,7 @@ class CLI
     end
     input
   end
-  
-  def more_info?
-    puts "\nEnter \"y\" to see the plot summary, a sample review and the aggregate"
-    puts "audience and critic scores for this movie or \"n\" to return to the main menu."
-  end
-  
+ 
   def second_level(movie)
     input = gets.chomp
     if input.downcase == "y"
@@ -54,14 +49,12 @@ class CLI
     input = prompt_for_input
     case 
     when (1..75).include?(input.to_i)  
-      found_movie = Movie.find_by_rank(input.to_i)           #move class finder to Movie class
+      found_movie = Movie.find_by_rank(input.to_i)           
       print_basic_movie_data(found_movie)                                              
-      more_info?                                                      
       second_level(found_movie)
     when input.downcase == "random"
       random_movie = Movie.all.sample                                                                               
       print_basic_movie_data(random_movie)
-      more_info?
       second_level(random_movie)
     when input.downcase == "all"
       print_movie_list
@@ -73,6 +66,8 @@ class CLI
   
   def print_basic_movie_data(movie)
     puts "\nNumber #{movie.rank}. #{movie.title} was released in cinemas in #{movie.year}."
+    puts "\nEnter \"y\" to see the plot summary, a sample review and the aggregate"
+    puts "audience and critic scores for this movie or \"n\" to return to the main menu."
   end
   
   def print_movie_list
