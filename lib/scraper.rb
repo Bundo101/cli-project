@@ -27,7 +27,8 @@ class Scraper
       
       standard_url = movie.css("div p a").attribute("href").value
       alternate_url = movie.css("div p a")[1].attribute("href").value
-      standard_url.include?("www.metacritic.com/") ? url = standard_url : url = alternate_url
+      #standard_url.include?("www.metacritic.com/") ? url = standard_url : url = alternate_url
+      url = standard_url.include?("www.metacritic.com/") ? standard_url : alternate_url
         
       sample_review = movie.text.split("said:")[1].split("\"")[1]
       create_hash(basic_movie_data, url, sample_review)
