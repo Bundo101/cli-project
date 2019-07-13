@@ -27,12 +27,11 @@ class Scraper
       
       standard_url = movie.css("div p a").attribute("href").value
       alternate_url = movie.css("div p a")[1].attribute("href").value
-      #standard_url.include?("www.metacritic.com/") ? url = standard_url : url = alternate_url
       url = standard_url.include?("www.metacritic.com/") ? standard_url : alternate_url
         
       sample_review = movie.text.split("said:")[1].split("\"")[1]
       create_hash(basic_movie_data, url, sample_review)
-    end   #returns array of hashes
+    end   
   end
   
   def scraped_movie_to_hash(movie_object)
@@ -41,13 +40,11 @@ class Scraper
     
     expanded_summary = scraped_movie_page.css("div.summary_deck span span span.blurb_expanded").text
     basic_summary = scraped_movie_page.css("div.summary_deck span span").text
-    #expanded_summary != "" ? plot_summary = expanded_summary : plot_summary = basic_summary
     plot_summary = expanded_summary != "" ? expanded_summary : basic_summary
     
     movie_hash[:critic_score] = scraped_movie_page.css("div.metascore_w.larger:not(.user)").text
     
     user_score = scraped_movie_page.css("div.metascore_w.user.larger").text
-    #user_score != "" ? movie_hash[:user_score] = "#{user_score}/10" : movie_hash[:user_score] = "tbd"
     movie_hash[:user_score] = user_score != "" ? "#{user_score}/10" : "tbd"
     
     movie_hash[:plot_summary] = plot_summary
