@@ -15,11 +15,14 @@ This project is created with:
 
 ## Usage
 
-To run this program type the following into your terminal:
+To run this program make sure you have Ruby installed on your computer and then type the following into your terminal:
+
 * git clone git@github.com:Bundo101/cli_project.git
 * cd cli_project
 * bundle install
 * bin/run
+
+Those steps will get the program running on your computer and you can follow the instructions from there.
 
 ## Development
 
