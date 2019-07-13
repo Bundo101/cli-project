@@ -1,26 +1,25 @@
-# Cli::Project
+# Cli::Project Detailing The Worst Movies Ever
 
-Scrape and display data on 75 worst movies ever according to Business Insider & Metacritic, and if the user wishes to know full details on how badly a particular movie was reviewed scrape Metacritic for that movie's data and display it.
+This program scrapes an article on the Business Insider website that lists the 75 worst movies of all time according to the aggregated crictic scores on Metacritic.com, and if the user wants to read full details on that movie it then scrapes Metacritic for that movie's data and displays it.
 
-## Installation
+## Technologies
 
-Add this line to your application's Gemfile:
+This project is created with:
 
-```ruby
-gem 'cli-project'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install cli-project
+* Ruby 
+* Bundler Gem
+* Pry Gem
+* Nokogiri Gem
+* Open-uri Gem
+* Colorize Gem ~> 0.8.1
 
 ## Usage
 
-TODO: Write usage instructions here
+To run this program type the following into your terminal:
+* git clone git@github.com:Bundo101/cli_project.git
+* cd cli_project
+* bundle install
+* bin/run
 
 ## Development
 
@@ -31,6 +30,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/'trustworthy-edition-7821'/cli-project. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+##Sources
+
+www.businessinsider.com
+www.metacritic.com
+www.ruby-doc.org
+www.rubygems.org
 
 ## License
 
