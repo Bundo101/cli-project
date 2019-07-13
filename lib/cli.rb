@@ -23,10 +23,14 @@ class CLI
     puts "\nIf you would like to view the entire list please type \"all\"".colorize(:green).bold 
     puts "\nTo close the program please type \"exit\"".colorize(:green).bold
     input = gets.chomp                    
-    if input.downcase == "exit"
-      exit
-    end
+    goodbye if input.downcase == "exit" 
     input
+  end
+  
+  def goodbye
+    puts "We hope you were appalled by this experience.".colorize(:cyan).bold
+    puts "Please enjoy the complimentary sick bags.".colorize(:cyan).bold
+    exit
   end
  
   def second_level(movie)
