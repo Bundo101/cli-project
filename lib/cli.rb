@@ -33,10 +33,11 @@ class CLI
     input = gets.chomp
     if input.downcase == "y"
       movie.get_extra_info                   
-      puts "#{movie.title}: #{movie.plot_summary}"
-      puts "\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100"     
-      puts "\nWhat the critics thought: #{movie.sample_review}"
-    elsif input.downcase == "n"
+      puts ("#{movie.title}: ".colorize(:yellow) + "#{movie.plot_summary}").colorize(:background => :blue).bold
+      puts ("\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100").colorize(:green).bold#(:color => :black, :background => :light_white)     
+      puts ("\nWhat the critics thought: ".colorize(:yellow) + "#{movie.sample_review}").colorize(:background => :light_red).bold
+      #puts "#{String.color_samples}"
+      elsif input.downcase == "n"
       main_menu
     else 
       puts "\nInvalid input, please enter \"y\" to see more information"
