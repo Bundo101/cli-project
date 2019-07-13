@@ -1,4 +1,8 @@
 require 'bundler/setup'
+require 'pry'
+require 'nokogiri'
+require 'open-uri'
+require 'colorize'
 Bundler.require(:default, :development)
 
 module Cli_Project

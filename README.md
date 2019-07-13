@@ -1,6 +1,6 @@
 # Cli::Project
 
-Scrape and display data on 75 worst movies ever according to Business Insider & Metacritic, and if the user wishes to know full details on how badly a particular movie was reviewed scrape Metacritic for that movie's data and display it, and provide a direct link to that metacritic page.
+Scrape and display data on 75 worst movies ever according to Business Insider & Metacritic, and if the user wishes to know full details on how badly a particular movie was reviewed scrape Metacritic for that movie's data and display it.
 
 ## Installation
 
