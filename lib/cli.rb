@@ -11,17 +11,17 @@ class CLI
   end
   
   def welcome
-    puts "Greetings discerning movie patron! Welcome to the Hollywood Walk of Shame!"
-    puts "\nThe 75 worst motion pictures to ever disappoint an audience and violently" 
-    puts "offend critics have been ranked according to the magnitude of their failure."
+    puts "Greetings discerning movie patron! Welcome to the Hollywood Walk of Shame!".colorize(:green).bold
+    puts "\nThe 75 worst motion pictures to ever disappoint an audience and violently".colorize(:green).bold
+    puts "offend critics have been ranked according to the magnitude of their failure.".colorize(:green).bold
   end
   
   def prompt_for_input
-    puts "\nIf you would like more information on a specific movie please enter that movie's" 
-    puts "rank as a number from 1 to 75 (eg for the worst movie type 1 and press enter)."
-    puts "\nIf you would like to see a random movie from this list please type \"random\""
-    puts "\nIf you would like to view the entire list please type \"all\"" 
-    puts "\nTo close the program please type \"exit\""
+    puts "\nIf you would like more information on a specific movie please enter that movie's".colorize(:green).bold
+    puts "rank as a number from 1 to 75 (eg for the worst movie type 1 and press enter).".colorize(:green).bold
+    puts "\nIf you would like to see a random movie from this list please type \"random\"".colorize(:green).bold
+    puts "\nIf you would like to view the entire list please type \"all\"".colorize(:green).bold 
+    puts "\nTo close the program please type \"exit\"".colorize(:green).bold
     input = gets.chomp                    
     if input.downcase == "exit"
       exit
@@ -34,9 +34,8 @@ class CLI
     if input.downcase == "y"
       movie.get_extra_info                   
       puts ("#{movie.title}: ".colorize(:yellow) + "#{movie.plot_summary}").colorize(:background => :blue).bold
-      puts ("\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100").colorize(:green).bold#(:color => :black, :background => :light_white)     
+      puts ("\nAudience score: #{movie.user_score}, Critic score: #{movie.critic_score}/100").colorize(:yellow).bold#(:color => :black, :background => :light_white)     
       puts ("\nWhat the critics thought: ".colorize(:yellow) + "#{movie.sample_review}").colorize(:background => :light_red).bold
-      #puts "#{String.color_samples}"
       elsif input.downcase == "n"
       main_menu
     else 
@@ -66,13 +65,13 @@ class CLI
   end
   
   def print_basic_movie_data(movie)
-    puts "\nNumber #{movie.rank}. #{movie.title} was released in cinemas in #{movie.year}."
-    puts "\nEnter \"y\" to see the plot summary, a sample review and the aggregate"
-    puts "audience and critic scores for this movie or \"n\" to return to the main menu."
+    puts "\nNumber #{movie.rank}. #{movie.title} was released in cinemas in #{movie.year}.".colorize(:green).bold
+    puts "\nEnter \"y\" to see the plot summary, a sample review and the aggregate".colorize(:green).bold
+    puts "audience and critic scores for this movie or \"n\" to return to the main menu.".colorize(:green).bold
   end
   
   def print_movie_list
-     Movie.all.each { |movie| puts "\n#{movie.rank}. #{movie.title} (#{movie.year})" }   #Need to add and format movie info output here
+     Movie.all.each { |movie| puts "\n#{movie.rank}. #{movie.title} (#{movie.year})".bold }   
   end
   
   def create_movies                                                           
