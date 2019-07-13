@@ -40,8 +40,8 @@ class CLI
       elsif input.downcase == "n"
       main_menu
     else 
-      puts "\nInvalid input, please enter \"y\" to see more information"
-      puts "about #{movie.title} or \"n\" to return to the main menu."
+      puts "\nInvalid input, please enter \"y\" to see more information".colorize(:red).bold
+      puts "about #{movie.title} or \"n\" to return to the main menu.".colorize(:red).bold
       second_level(movie)
     end
   end
@@ -60,7 +60,7 @@ class CLI
     when input.downcase == "all"
       print_movie_list
     else
-      puts "Please enter valid input"
+      puts "Please enter valid input".colorize(:red).bold
     end
     main_menu
   end
